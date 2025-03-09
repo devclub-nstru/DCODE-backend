@@ -1,0 +1,26 @@
+{
+  "name": "dcode-backend",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/devclub-nstru/DCODE-backend#readme",
+  "bugs": {
+    "url": "https://github.com/devclub-nstru/DCODE-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devclub-nstru/DCODE-backend.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1"
+  }
+}
