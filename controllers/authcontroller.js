@@ -1,4 +1,3 @@
-// controllers/authcontroller.js
 import User from '../models/usermodel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -21,8 +20,7 @@ export const signup = async (req, res) => {
         });
         
         const user = await newUser.save();
-        
-        // Create token for immediate login after signup
+    
         const token = jwt.sign(
             { id: user._id, username: user.username },
             process.env.JWT_SECRET || 'your_jwt_secret',

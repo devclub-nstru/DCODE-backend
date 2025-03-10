@@ -1,4 +1,3 @@
-// server.js
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
@@ -25,7 +24,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 
-const PORT = process.env.PORT || 3005;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(3000, () => {
+  console.log(`Server is running on port ${3000}`);
 });

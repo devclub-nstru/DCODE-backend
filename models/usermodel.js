@@ -1,4 +1,3 @@
-// models/usermodel.js
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
@@ -17,7 +16,6 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        // Not required for Google accounts
     },
     googleId: {
         type: String,

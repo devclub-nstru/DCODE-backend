@@ -18,7 +18,6 @@ const mailOptions = {
     text: "Hey, this is me",
 };
 
-// Send mail
 transporter.sendMail(mailOptions)
     .then(info => {
         console.log("Email Sent:", info);

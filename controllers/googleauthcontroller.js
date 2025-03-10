@@ -1,4 +1,3 @@
-// controllers/googleauthcontroller.js
 import User from '../models/usermodel.js';
 import jwt from 'jsonwebtoken';
 import { OAuth2Client } from 'google-auth-library';
@@ -35,7 +34,6 @@ export const googleAuth = async (req, res) => {
             
             await user.save();
         } else if (!user.googleId) {
-            // Link existing account with Google
             user.googleId = sub;
             user.isGoogleAccount = true;
             user.profilePicture = picture || user.profilePicture;
