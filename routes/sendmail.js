@@ -1,5 +1,9 @@
 import dotenv from "dotenv";
 import nodemailer from "nodemailer"; 
+import jwt from "jsonwebtoken";
+import User from "usermodel.js"
+import express from "express";
+import fs from "fs";
 
 dotenv.config();
 
