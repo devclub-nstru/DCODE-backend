@@ -1,9 +1,5 @@
 import dotenv from "dotenv";
 import nodemailer from "nodemailer"; 
-import jwt from "jsonwebtoken";
-import User from "usermodel.js"
-import express from "express";
-import fs from "fs";
 
 dotenv.config();
 
@@ -17,12 +13,11 @@ const transporter = nodemailer.createTransport({
 
 const mailOptions = {
     from: process.env.EMAIL_USER, 
-    to: process.env.EMAIL_USER,
+    to: process.env.EMAIL_SENDER,
     subject: "Test Email",
     text: "Hey, this is me",
 };
 
-// Send mail
 transporter.sendMail(mailOptions)
     .then(info => {
         console.log("Email Sent:", info);
