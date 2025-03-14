@@ -4,8 +4,8 @@ import User from "../models/usermodel.js";
 export const transferDCoins = async (req, res) => {
   const { receiverId, amount, is_email } = req.body;
   //   console.log("sadfdsfvdfvc->>>>>>", receiverId, amount, is_email);
-  const senderId = req.user.id; // Assuming user ID is available in req.user
-  const ADMIN_ID = "67d37baeee20cbd55d975e1f"; // Admin's user ID
+  const senderId = req.user.id;
+  const ADMIN_ID = "67d37baeee20cbd55d975e1f";
 
   try {
     const sender = await User.findById(senderId);
@@ -30,7 +30,7 @@ export const transferDCoins = async (req, res) => {
     let receiver;
     if (is_email) {
       // Check if is_email is true
-      console.log("email");
+      //   console.log("email");
       receiver = await User.findOne({ email: receiverId });
     } else {
       receiver = await User.findById(receiverId);
@@ -54,7 +54,7 @@ export const transferDCoins = async (req, res) => {
     // Create transaction record for the actual payment
     const transaction = new Transaction({
       senderId,
-      receiverId: receiver._id,
+      receiverId: is_email ? receiver._id : receiverId,
       amount: netAmount,
       type: "transfer",
       status: "completed",
