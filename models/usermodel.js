@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: false,
+    },
     username: {
       type: String,
       required: true,
@@ -14,6 +18,45 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
       trim: true,
+    },
+    stats: {
+      type: Array,
+      required: true,
+    },
+    issues: [
+      {
+        title: String,
+        tag: String,
+        date: Date,
+        status: {
+          type: String,
+          enum: ["assigned", "completed", "in-progress"],
+        },
+      },
+    ],
+    pullRequests: [
+      {
+        title: String,
+        tag: String,
+        date: Date,
+        status: {
+          type: String,
+          enum: ["open", "merged", "closed"],
+        },
+      },
+    ],
+    mysteryBoxes: [
+      {
+        id: String,
+        name: String,
+        rarity: String,
+        unopened: Boolean,
+        reward: String,
+      },
+    ],
+    achievements: {
+      type: Array,
+      required: true,
     },
     password: {
       type: String,

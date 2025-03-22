@@ -65,3 +65,29 @@ export const purchaseIssue = async (req, res) => {
     res.json({ status: false, message: "Server error during purchase" });
   }
 };
+
+export const getIssueDetails = async (req, res) => {
+  const { issueId } = req.params;
+
+  try {
+    const issue = await Issue.findById(issueId);
+
+    if (!issue) {
+      return res.json({
+        status: false,
+        message: "Issue not found",
+      });
+    }
+
+    res.status(200).json({
+      status: true,
+      issue,
+    });
+  } catch (error) {
+    console.error("Error fetching issue details:", error);
+    res.json({
+      status: false,
+      message: "Server error fetching issue details",
+    });
+  }
+};
