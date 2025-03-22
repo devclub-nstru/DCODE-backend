@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/authroute.js";
+import userRoutes from "./routes/userroute.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import rateLimit from "express-rate-limit";
@@ -36,6 +37,7 @@ app.get("/", (req, res) => {
 // app.use("/api/auth", authRoutes);
 
 app.use("/api/auth", limiter, authRoutes);
+app.use("/api/user", limiter, userRoutes)
 app.use("/api/transactions", limiter, transactionRoutes);
 app.use("/api/admin", limiter, adminRoutes);
 app.use("/api/marketplace", limiter, marketplaceRoutes);
