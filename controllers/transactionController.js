@@ -21,20 +21,6 @@ export const transferDCoins = async (req, res) => {
       return res.json({ status: false, message: "Insufficient D-Coins" });
     }
 
-    const fee = Math.round(amount * 0.2); // 20% fee
-    const netAmount = Math.round(amount - fee); // Amount to be sent to the receiver
-
-    // Deduct D-Coins from sender (only the net amount)
-    sender.dCoins -= amount;
-    await sender.save();
-
-    // Add fee to admin's account
-    const admin = await User.findById(ADMIN_ID);
-    if (admin) {
-      admin.dCoins += fee;
-      await admin.save();
-    }
-
     let receiver;
     if (is_email) {
       // Check if sender is trying to send to their own email
@@ -48,9 +34,22 @@ export const transferDCoins = async (req, res) => {
     } else {
       receiver = await User.findById(receiverId);
     }
-
     if (!receiver) {
-      return res.status(400).json({ message: "Receiver not found" });
+      return res.json({ status: false, message: "Receiver not found" });
+    }
+
+    const fee = Math.round(amount * 0.2); // 20% fee
+    const netAmount = Math.round(amount - fee); // Amount to be sent to the receiver
+
+    // Deduct D-Coins from sender (only the net amount)
+    sender.dCoins -= amount;
+    await sender.save();
+
+    // Add fee to admin's account
+    const admin = await User.findById(ADMIN_ID);
+    if (admin) {
+      admin.dCoins += fee;
+      await admin.save();
     }
 
     receiver.dCoins += netAmount;
@@ -76,7 +75,7 @@ export const transferDCoins = async (req, res) => {
     });
     await transaction.save();
 
-    res.status(200).json({
+    res.json({
       status: true,
       transaction: {
         ...transaction,
@@ -85,7 +84,7 @@ export const transferDCoins = async (req, res) => {
     });
   } catch (error) {
     console.error("Transfer error:", error);
-    res.status(500).json({ message: "Server error during transfer" });
+    res.json({ status: false, message: "Server error during transfer" });
   }
 };
 
@@ -107,8 +106,6 @@ export const getTransactionHistory = async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching transaction history:", error);
-    res
-      .status(200)
-      .json({ status: false, message: "Error fetching transaction history" });
+    res.json({ status: false, message: "Error fetching transaction history" });
   }
 };

@@ -25,7 +25,7 @@ export const purchaseIssue = async (req, res) => {
     }
 
     // Check if the issue has already been purchased
-    if (issue.purchasedUserId) {
+    if (!issue.available) {
       return res.json({
         status: false,
         message: "This issue has already been purchased",
@@ -51,6 +51,10 @@ export const purchaseIssue = async (req, res) => {
     issue.available = false;
     issue.githubUsername = githubUsername;
     issue.purchasedUserId = user;
+    issue.labels = issue.labels.filter(
+      (label) => label !== "assignment-available"
+    );
+    issue.labels.push("already-assigned");
     await issue.save();
 
     res
