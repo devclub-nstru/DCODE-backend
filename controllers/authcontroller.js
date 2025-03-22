@@ -92,7 +92,7 @@ export const verifyToken = (req, res, next) => {
       token,
       process.env.JWT_SECRET || "your_jwt_secret"
     );
-    req.user = decoded;
+    req.user = decoded.id;
     next();
   } catch (error) {
     res.status(400).json({ message: "Invalid token" });

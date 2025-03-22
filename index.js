@@ -6,6 +6,8 @@ import authRoutes from "./routes/authroute.js";
 import transactionRoutes from "./routes/transactionRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import rateLimit from "express-rate-limit";
+import marketplaceRoutes from "./routes/marketplaceRoutes.js";
+import walletRoutes from "./routes/walletRoutes.js";
 dotenv.config();
 
 mongoose
@@ -36,6 +38,8 @@ app.get("/", (req, res) => {
 app.use("/api/auth", limiter, authRoutes);
 app.use("/api/transactions", limiter, transactionRoutes);
 app.use("/api/admin", limiter, adminRoutes);
+app.use("/api/marketplace", limiter, marketplaceRoutes);
+app.use("/api/wallet", limiter, walletRoutes);
 
 app.listen(4000, () => {
   console.log(`Server is running on port ${4000}`);
