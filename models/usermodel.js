@@ -22,6 +22,23 @@ const userSchema = new mongoose.Schema(
     stats: {
       type: Array,
       required: true,
+      default: [
+        {
+          icon: "repo",
+          value: 0,
+          label: "Issues Created",
+        },
+        {
+          icon: "git-branch",
+          value: 0,
+          label: "Pull Requests",
+        },
+        {
+          icon: "gift",
+          value: 0,
+          label: "Mystery Boxes",
+        },
+      ],
     },
     issues: [
       {
